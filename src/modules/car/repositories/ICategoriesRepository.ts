@@ -7,5 +7,5 @@ export interface ICategoryDTO {
 export interface ICategoriesRepository {
     create({name, description}: ICategoryDTO): void;
     findByName(name: string):Category;
-    find(): Category[];
+    list(): Category[];
 }
