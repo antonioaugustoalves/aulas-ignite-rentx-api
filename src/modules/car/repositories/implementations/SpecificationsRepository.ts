@@ -1,7 +1,7 @@
 import { Specification } from "../../models/Specification";
-import { ICreateSpecificationDTO, ISpecificationRepository } from "../ISpecificationsRepository";
+import { ICreateSpecificationDTO, ISpecificationsRepository } from "../ISpecificationsRepository";
 
-export class SpecificationsRepository implements ISpecificationRepository {
+export class SpecificationsRepository implements ISpecificationsRepository {
     private specifications: Specification[];
     private static INSTANCE: SpecificationsRepository;
 
@@ -23,8 +23,10 @@ export class SpecificationsRepository implements ISpecificationRepository {
             { name, description, createdAt: new Date() }
         );
         this.specifications.push(specification);
+        console.log(this.specifications);
     }
     list(): Specification[] {
+        console.log(this.specifications);
         return this.specifications;
     }
     findByName(name: string): Specification {
