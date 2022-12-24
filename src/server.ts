@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { categoriesRoutes } from "./routes/categories.routes";
-import { specificationRoutes } from "./routes/specification.routes";
+import { router } from "./routes";
 
 const app = express();
 const port = 3333;
@@ -12,10 +11,7 @@ app.get("/home", (request, response) =>{
     response.status(200).json({message: "HELLO WORLD!"});
 });
 
-app.use("/categories", categoriesRoutes);
-app.use("/specifications", specificationRoutes);
-
-
+app.use(router);
 
 app.listen(port,() =>{
     console.log(`App listening on ${port}`);
