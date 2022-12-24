@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { categoriesRoutes } from "./routes/categories.routes";
+import { specificationRoutes } from "./routes/specification.routes";
 
 const app = express();
 const port = 3333;
@@ -12,6 +13,7 @@ app.get("/home", (request, response) =>{
 });
 
 app.use("/categories", categoriesRoutes);
+app.use("/specifications", specificationRoutes);
 
 
 
