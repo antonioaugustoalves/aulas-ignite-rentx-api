@@ -4,9 +4,10 @@ import { ImportCategoriesUseCase } from "./ImportCategoriesUseCase";
 
 export class ImportCategoriesControler {
     
-    handle(request: Request, response: Response): Response {
+    async handle(request: Request, response: Response): Promise<Response> {
         const { file } = request;
         const importCategoriesUseCase = container.resolve(ImportCategoriesUseCase);
-        return response.status(201).send();
+        await importCategoriesUseCase.execute(file);
+        return await response.status(201).send();
     }
 }
