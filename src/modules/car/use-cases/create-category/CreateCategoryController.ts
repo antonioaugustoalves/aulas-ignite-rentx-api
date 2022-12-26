@@ -6,10 +6,10 @@ export class CreateCategoryController {
         private createCategoryUseCase: CreateCategoryUseCase
     ){}
 
-    handle(request: Request, response: Response): void {
+    async handle(request: Request, response: Response): Promise<Response> {
         const { name, description } = request.body;
         
-        this.createCategoryUseCase.execute({ name, description });
-        response.status(201).send("Created!");
+        await this.createCategoryUseCase.execute({ name, description });
+        return response.status(201).send("Created!");
     }
 }
