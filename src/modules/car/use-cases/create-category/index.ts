@@ -1,4 +1,4 @@
-import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
+/*import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
 import { CreateCategoryController } from "./CreateCategoryController";
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 
@@ -9,6 +9,6 @@ const createCategoryController = new CreateCategoryController(createCategoryUseC
 
 return createCategoryController;
 }
-
+*/
 
 
