@@ -1,12 +1,15 @@
 import fs from "fs";
+import { inject, injectable } from "tsyringe";
 import { parse } from "csv-parse";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 interface IImportCategories {
     name: string;
     description: string;
 }
+@injectable()
 export class ImportCategoriesUseCase {
     constructor(
+        @inject("CategoriesRepository")
         private categoriesRepository: ICategoriesRepository
     ) { }
 

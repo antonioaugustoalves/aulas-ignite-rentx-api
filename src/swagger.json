@@ -48,23 +48,25 @@
                 }
             },
             "get": {
-                "tags":["Category"],
+                "tags": [
+                    "Category"
+                ],
                 "summary": "List all categories from database",
                 "description": "List all categories from database",
-                "responses" :{
+                "responses": {
                     "200": {
                         "description": "Find all categories successfully",
-                        "content":{
+                        "content": {
                             "application/json": {
-                                "schema":{
+                                "schema": {
                                     "type": "array",
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "name":{
-                                                "type":"string"
-                                            }, 
-                                            "description":{
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
                                                 "type": "string"
                                             }
                                         }
@@ -74,7 +76,78 @@
                         }
                     }
                 }
-
+            }
+        },
+        "/categories/import": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Import categories",
+                "description": "Import categories from a csv file",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "file":{
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201": {"description": "Upload complete"},
+                    "500":{"description": "Upload error"}
+                }
+            }
+        },
+        "/specifications": {
+            "post": {
+                "tags": [
+                    "Specifications"
+                ],
+                "summary": "Create new specification",
+                "description": "Create a new specifiation about a car",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Specification"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Createad successfully"
+                    },
+                    "500": {
+                        "description": "Specification already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Specifications"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Specification": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
             }
         }
     }
