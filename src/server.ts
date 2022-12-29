@@ -17,7 +17,11 @@ app.get("/home", (request, response) =>{
 });
 
 app.use(router);
-
+app.post("/teste", (request, response) =>{
+    const {user, password} = request.body;
+    console.log("user: " + user +" - password: " + password);
+    response.send("OK")
+});
 app.listen(port,() =>{
     console.log(`App listening on ${port}`);
 });
