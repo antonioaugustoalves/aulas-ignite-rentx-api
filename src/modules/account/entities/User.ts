@@ -15,7 +15,7 @@ import {v4 as uuidv4} from "uuid";
     driverLicense: string;
     @Column()
     isAdmin: boolean;
-    
+    @Column()
     avatarUrl: string;
     @CreateDateColumn()
     createdAt: Date;
