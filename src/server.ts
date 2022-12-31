@@ -1,11 +1,13 @@
 import "reflect-metadata";
-import express from "express";
+import express, { NextFunction, Response, Request } from "express";
+import "express-async-errors";
 import cors from "cors";
 import swagggerUI from "swagger-ui-express";
 import swaggerFile from "./swagger.json";
 import "./shared/container";
 import "./database";
 import { router } from "./routes";
+import { AppError } from "./errors/AppError";
 
 const app = express();
 const port = 3333;
@@ -21,6 +23,22 @@ app.post("/teste", (request, response) =>{
     const {user, password} = request.body;
     console.log("user: " + user +" - password: " + password);
     response.send("OK")
+});
+
+app.use((err:Error, 
+    request: Request, 
+    response: Response, 
+    next: NextFunction)=>{
+
+        if(err instanceof AppError){
+            return response.status(err.statusCode).json({message: err.message});
+        }
+
+        return response.status(500).json({
+            status: "error",
+            message: `Internal server error: ${err.message}}`
+        })
+
 });
 app.listen(port,() =>{
     console.log(`App listening on ${port}`);
