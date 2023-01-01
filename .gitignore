@@ -1,10 +1,10 @@
 node_modules
 tmp/*.csv
-tmp/**/*.jpg
-tmp/**/*.jpeg
-tmp/**/*.bmp
-tmp/**/*.png
+tmp/*.jpg
+tmp/*.jpeg
+tmp/*.bmp
+tmp/*.png
 
-tmp/**/*.webp
-tmp/**/*.gif
-tmp/**/*.jiff
+tmp/*.webp
+tmp/*.gif
+tmp/*.jiff
