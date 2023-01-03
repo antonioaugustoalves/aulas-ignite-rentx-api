@@ -8,7 +8,7 @@ import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 class CreateUserUseCase {
     constructor(
         @inject("UsersRepository")
-        private usersRepository: UsersRepository
+        private usersRepository: IUsersRepository
     ){}
     async execute({name, email, password, driverLicense}:ICreateUserDTO): Promise<void>{
         const userExists = await this.usersRepository.findByEmail(email);
