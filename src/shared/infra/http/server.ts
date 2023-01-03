@@ -3,11 +3,11 @@ import express, { NextFunction, Response, Request } from "express";
 import "express-async-errors";
 import cors from "cors";
 import swagggerUI from "swagger-ui-express";
-import swaggerFile from "./swagger.json";
-import "./database";
+import swaggerFile from "../../../swagger.json";
+import "@shared/infra/typeorm/index";
 import { router } from "./routes";
 import "@shared/container";
-import { AppError } from "@errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 
 const app = express();
 const port = 3333;

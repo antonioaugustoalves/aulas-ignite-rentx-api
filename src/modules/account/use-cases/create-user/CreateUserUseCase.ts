@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe"; 
-import { AppError } from "@errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 import {hash} from "bcrypt";
 import { IUsersRepository } from "@modules/account/repositories/IUsersRepository";
 import { ICreateUserDTO } from "@modules/account/dtos/ICreateUserDTO";
