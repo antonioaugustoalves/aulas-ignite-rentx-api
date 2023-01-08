@@ -30,3 +30,5 @@ class Car {
     }
 
 }
+
+export {Car}
