@@ -1,3 +1,4 @@
+import { Car } from "@modules/car/infra/typeorm/entities/Car";
 import { ICarsRepository } from "@modules/car/repositories/ICarsRepository";
 import { inject, injectable } from "tsyringe";
 interface IRequest {
@@ -16,7 +17,10 @@ class CreateCarUseCase {
     //@injectable()
     private carsRepository: ICarsRepository){}
 
-    async 
+    async execute(data: IRequest): Promise<Car> {
+        const car = new Car();
+        return car;
+    }
 }
 
 export {CreateCarUseCase}
