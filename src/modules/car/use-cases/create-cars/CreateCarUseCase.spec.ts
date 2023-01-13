@@ -42,9 +42,23 @@ describe("Create a car", () =>{
                 dailyRate: 200,
                 licensePlate: "ABC1-C234",
                 fineAmount: 50,
-                brand: "VolksWagen",
+                brand: "Chevrolet",
                 categoryId: "sample123"
             });
         }).rejects.toBeInstanceOf(AppError);
     });
+
+    it("should be create a car with avaliable true by default", 
+    async () =>{
+        const car = await createCar.execute({
+            name: "Fiat Uno",
+            description: "Uno Mille 1995 com escada em cima",
+            dailyRate: 200,
+            licensePlate: "ABC1-C234",
+            fineAmount: 50,
+            brand: "Fiat",
+            categoryId: "sample123"
+        });
+        expect(car.avaliable).toBe(true);
+    })
 })

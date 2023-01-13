@@ -21,17 +21,19 @@ class CreateCarUseCase {
     async execute({name, 
     description, dailyRate, 
     licensePlate, fineAmount, brand,
-    categoryId}: IRequest): Promise<void> {
+    categoryId}: IRequest): Promise<Car> {
         const carAlreadyExists = await this.carsRepository.findByLicensePlate(licensePlate);
         if(carAlreadyExists){
             throw new AppError("Car already exists");
         }
 
-        await this.carsRepository.create({
+        const car = await this.carsRepository.create({
             name, description, dailyRate, 
             licensePlate, fineAmount, brand,
             categoryId
         });
+
+        return car;
 
     }
 }
