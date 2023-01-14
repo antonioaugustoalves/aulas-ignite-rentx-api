@@ -1,5 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import {v4 as uuidv4} from "uuid";
+import { CategoriesRepository } from "../repositories/CategoriesRepository";
+import { Category } from "./Category";
 @Entity("cars")
 class Car {
     @PrimaryColumn()
@@ -18,15 +20,19 @@ class Car {
     fineAmount: number;
     @Column()
     brand: string;
+    // relacionamento entre categoria e carro
+    @ManyToOne(() => Category)
+    @JoinColumn({name: "categoryId"})
+    category: Category
     @Column()
     categoryId: string;
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt = new Date();
 
     constructor(){
         if(!this.id) {
             this.id = uuidv4();
-            this.createdAt = new Date();
+            
         }
     }
 
