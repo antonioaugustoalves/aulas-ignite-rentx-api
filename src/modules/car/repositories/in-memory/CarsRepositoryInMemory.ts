@@ -4,6 +4,7 @@ import { ICarsRepository } from "../ICarsRepository";
 
 class CarsRepositoryInMemory implements ICarsRepository {
     
+    
     cars:Car[] = [];
 
     async create({
@@ -21,6 +22,14 @@ class CarsRepositoryInMemory implements ICarsRepository {
 
     async findByLicensePlate(licensePlate: string): Promise<Car> {
         return this.cars.find(car => car.licensePlate === licensePlate);
+    }
+
+    async findAll(): Promise<Car[]> {
+        return this.cars;
+    }
+
+    async findAvaliable(): Promise<Car[]> {
+        throw new Error("Method not implemented.");
     }
     
 }
