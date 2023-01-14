@@ -12,7 +12,7 @@ describe("Create a car", () =>{
     });
 
     it("should be able to create a car", async () =>{
-        await createCar.execute({
+        const car = await createCar.execute({
             name: "Fusca 1400",
             description: "Volkswagen Fusca 1971",
             dailyRate: 200,
@@ -21,6 +21,8 @@ describe("Create a car", () =>{
             brand: "VolksWagen",
             categoryId: "sample123"
         })
+
+        expect(car).toHaveProperty("id")
         
     });
 

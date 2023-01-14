@@ -11,7 +11,7 @@ class Car {
     @Column()
     dailyRate: number;
     @Column()
-    avaliable: boolean;
+    avaliable = true;
     @Column()
     licensePlate: string;
     @Column()
@@ -27,7 +27,6 @@ class Car {
         if(!this.id) {
             this.id = uuidv4();
             this.createdAt = new Date();
-            this.avaliable = true;
         }
     }
 
