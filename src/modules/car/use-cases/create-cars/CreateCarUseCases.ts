@@ -12,10 +12,10 @@ interface IRequest {
     categoryId: string;
     
 }
-//@injectable()
+@injectable()
 class CreateCarUseCase {
    constructor(
-    //@injectable()
+    @inject("CarsRepository")
     private carsRepository: ICarsRepository){}
 
     async execute({name, 
