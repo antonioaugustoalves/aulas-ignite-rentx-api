@@ -4,11 +4,12 @@ import "express-async-errors";
 import cors from "cors";
 import swagggerUI from "swagger-ui-express";
 import swaggerFile from "../../../swagger.json";
-import "@shared/infra/typeorm/index";
+import createConnection from "@shared/infra/typeorm/index";
 import { router } from "./routes";
 import "@shared/container";
 import { AppError } from "@shared/errors/AppError";
 
+createConnection();
 const app = express();
 const port = 3333;
 app.use(cors());
