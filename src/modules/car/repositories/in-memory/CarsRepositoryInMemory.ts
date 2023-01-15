@@ -10,12 +10,12 @@ class CarsRepositoryInMemory implements ICarsRepository {
 
     async create({
         name, description, dailyRate, licensePlate,
-        fineAmount,brand, categoryId
+        fineAmount,brand, categoryId, specifications, id
     }: ICarDTO): Promise<Car> {
         const car = new Car();
         Object.assign(car, {
             name, description, dailyRate, licensePlate,
-            fineAmount,brand, categoryId
+            fineAmount,brand, categoryId, specifications, id
         });
         this.cars.push(car);
         return car;
