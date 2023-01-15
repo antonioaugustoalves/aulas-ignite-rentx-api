@@ -8,6 +8,7 @@ class CarsRepository implements ICarsRepository {
     constructor(){
         this.repository = getRepository(Car);
     }
+    
    
     async create({name, description, 
         dailyRate, licensePlate, fineAmount,
@@ -57,6 +58,14 @@ class CarsRepository implements ICarsRepository {
 
         const cars = await carsQuery.getMany();
         return cars;
+    }
+
+    async findById(id: string): Promise<Car> {
+        const car = await this.repository.findOne({
+            id
+        });
+
+        return car;
     }
     
 }
