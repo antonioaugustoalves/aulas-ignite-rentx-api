@@ -14,7 +14,7 @@ class CarsRepositoryInMemory implements ICarsRepository {
         const car = new Car();
         Object.assign(car, {
             name, description, dailyRate, licensePlate,
-        fineAmount,brand, categoryId
+            fineAmount,brand, categoryId
         });
         this.cars.push(car);
         return car;
@@ -28,8 +28,22 @@ class CarsRepositoryInMemory implements ICarsRepository {
         return this.cars;
     }
 
-    async findAvaliable(): Promise<Car[]> {
-        throw new Error("Method not implemented.");
+    async findAvaliable(categoryId?:string, 
+        name?:string,
+        brand?:string): Promise<Car[]> {
+        const cars = this.cars
+        .filter((car) => {
+            if (car.avaliable === true || 
+                ((brand && car.brand === brand) ||
+                (name && car.name === name) ||
+                (categoryId && car.categoryId === categoryId)
+                )){
+                    return car;
+            }
+            return null;
+        });
+        return cars;
+
     }
     
 }

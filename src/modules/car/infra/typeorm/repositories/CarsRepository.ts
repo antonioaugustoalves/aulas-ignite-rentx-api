@@ -35,8 +35,28 @@ class CarsRepository implements ICarsRepository {
         return cars;
     }
     
-    async findAvaliable(): Promise<Car[]> {
-        throw new Error("Method not implemented.");
+    async findAvaliable(
+        categoryId?:string,
+        name?: string,
+        brand?: string): Promise<Car[]> {
+        const carsQuery = await this.repository
+        .createQueryBuilder("c")
+        .where("c.avaliable = :avaliable",{avaliable: true});
+
+        if(brand){
+            carsQuery.andWhere("c.brand = :brand",{brand})
+        }
+
+        if(name){
+            carsQuery.andWhere("c.name = :name",{name})
+        }
+
+        if(categoryId){
+            carsQuery.andWhere("c.categoryId = :categoryId",{categoryId})
+        }
+
+        const cars = await carsQuery.getMany();
+        return cars;
     }
     
 }

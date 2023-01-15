@@ -5,7 +5,10 @@ interface ICarsRepository {
     create(data: ICarDTO): Promise<Car>;
     findByLicensePlate(licensePlate: string): Promise<Car>;
     findAll(): Promise<Car[]>;
-    findAvaliable():Promise<Car[]>;
+    findAvaliable(
+        categoryId?:string, 
+        name?:string,
+        brand?:string):Promise<Car[]>;
 }
 
 export {ICarsRepository}
