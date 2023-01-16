@@ -21,8 +21,10 @@ ensureAuthentication,
 ensureAdmin, listCarsController.handle);
 
 carsRoutes.get("/avaliable", listAvaliableCarsController.handle);
+
 carsRoutes.post("/specifications/:id",
 ensureAuthentication, 
 ensureAdmin, 
 createCarSpecificationsController.handle);
+
 export {carsRoutes}
