@@ -6,7 +6,7 @@ import { app } from "@shared/infra/http/app";
 import { Connection } from "typeorm";
 
 let connection: Connection;
-describe("Create Category controller", async () => {
+describe("Create Category controller",  () => {
     beforeAll(async () => {
         connection = await createConnection("localhost");
         await connection.runMigrations();
@@ -29,21 +29,26 @@ describe("Create Category controller", async () => {
 
     });
 });
-it("Should be able to create a new category", async () => {
+it("Should be able to create a new category", async (): Promise<void> => {
     const responseToken = await request(app)
     .post("/sessions")
     .send({
         email:'admin@rentx.com',
         password: 'admin'
     });
+
+    const {token} = responseToken.body;
+
     const response = await request(app)
         .post("/categories")
         .send({
             name: "Hatch",
             description: "Carro compacto"
-        });
+        }).set({Authorization: `Bearer ${token}`});
 
-    expect(response.status).toBe(201);
+        expect(response).toBe(201);
+
+    
 });
 
 
