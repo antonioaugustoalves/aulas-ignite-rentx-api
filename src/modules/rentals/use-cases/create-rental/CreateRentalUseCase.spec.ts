@@ -40,7 +40,7 @@ describe("Create a car Rental", () =>{
             await createRentalUseCase.execute({
                 userId: "12345",
                 carId: "ABC12334",
-                expectedReturnDate: new Date()
+                expectedReturnDate: dayAdd24Hs
             });
         }).rejects.toBeInstanceOf(AppError)
     });
