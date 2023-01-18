@@ -34,7 +34,8 @@ createCarSpecificationsController.handle);
 
 carsRoutes.post("/images/:id", 
 ensureAuthentication,
+ensureAdmin,
 uploadImages.array("images"),
-ensureAdmin, uploadImagesController.handle);
+ uploadImagesController.handle);
 
 export {carsRoutes}

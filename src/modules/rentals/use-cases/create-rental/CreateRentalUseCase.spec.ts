@@ -1,23 +1,28 @@
+import dayjs from "dayjs";
 import { RentalsRepositoryInMemory } from "@modules/rentals/repositories/in-memory/RentalsRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
 import { CreateRentalUseCase } from "./CreateRentalUseCase";
+import { DayJSProvider } from "@shared/container/providers/implementations/DayJSProvider";
 
 let rentalsRepository: RentalsRepositoryInMemory;
-let createRentalUsecase: CreateRentalUseCase;
+let createRentalUseCase: CreateRentalUseCase;
+let dayjsDateProvider: DayJSProvider;
 describe("Create a car Rental", () =>{
+    const dayAdd24Hs = dayjs().add(1, "day").toDate();
     beforeEach(() =>{
         rentalsRepository = new RentalsRepositoryInMemory();
-        createRentalUsecase = new CreateRentalUseCase(rentalsRepository);
+        dayjsDateProvider = new DayJSProvider();
+        createRentalUseCase = new CreateRentalUseCase(rentalsRepository, dayjsDateProvider);
     });
 
     it("should create a car rental", async() =>{
-        const rental = await createRentalUsecase.execute({
+        const rental = await createRentalUseCase.execute({
             userId: "12345",
             carId: "ABC12334",
-            expectedReturnDate: new Date()
+            expectedReturnDate: dayAdd24Hs
         });
 
-        console.log(rental);
+        // console.log(rental);
 
         expect(rental).toHaveProperty("id");
         expect(rental).toHaveProperty("startDate");
@@ -26,13 +31,13 @@ describe("Create a car Rental", () =>{
     it("should not be able to create rental if it already another to the same user", 
     async() =>{
         expect(async () =>{
-            await createRentalUsecase.execute({
+            await createRentalUseCase.execute({
                 userId: "12345",
                 carId: "ABC12334",
-                expectedReturnDate: new Date()
+                expectedReturnDate: dayAdd24Hs
             });
     
-            await createRentalUsecase.execute({
+            await createRentalUseCase.execute({
                 userId: "12345",
                 carId: "ABC12334",
                 expectedReturnDate: new Date()
@@ -43,17 +48,28 @@ describe("Create a car Rental", () =>{
     it("should not be able to create rental if it already another to the same car", 
     async() =>{
         expect(async () =>{
-            await createRentalUsecase.execute({
+            await createRentalUseCase.execute({
                 userId: "1234567",
                 carId: "ABC12334",
                 expectedReturnDate: new Date()
             });
     
-            await createRentalUsecase.execute({
+            await createRentalUseCase.execute({
                 userId: "12345",
                 carId: "ABC12334",
                 expectedReturnDate: new Date()
             });
+        }).rejects.toBeInstanceOf(AppError)
+    });
+
+    it("should not be able to create rental if rental duration is less than 24Hs",
+     async () =>{
+        expect(async() =>{
+            await createRentalUseCase.execute({
+                userId: "12345",
+                carId: "ABC12334",
+                expectedReturnDate: dayjs().toDate()
+            })
         }).rejects.toBeInstanceOf(AppError)
     });
 });
