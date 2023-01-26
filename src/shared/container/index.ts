@@ -38,6 +38,6 @@ container.registerSingleton<IRentalsRepository>(
 );
 
 container.registerSingleton<IDateProvider>(
-    "DayJSProvider", DayJSProvider
+    "DayjsProvider", DayJSProvider
 );
 

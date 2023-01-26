@@ -27,7 +27,7 @@ describe("Create category", () => {
     });
 
     it("Should not  be able to create a new category if it already exists", async () => {
-        expect(async () =>{
+        await expect(async () =>{
             const category = {
                 name: "Category Test",
                 description: "Test description"
