@@ -4,7 +4,6 @@ import "express-async-errors";
 import cors from "cors";
 import swagggerUI from "swagger-ui-express";
 import swaggerFile from "../../../swagger.json";
-
 import { router } from "./routes";
 import "@shared/container";
 import { AppError } from "@shared/errors/AppError";
