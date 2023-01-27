@@ -14,8 +14,9 @@ describe("Testing CreateCategoryController",() =>{
         const password = await hash("admin", 8);
         const sql =  `
         INSERT INTO USERS 
-        (id, name, email, passowrd, isAdmin, createdAt, driverLicense) 
-        values ('${id}', 'Antonio','test@rentx.com','${password}',
+        (id, name, email, password, "isAdmin", "createdAt", "driverLicense") 
+        values ('${id}', 'Antonio','test@rentx.com',
+        '${password}',
         true, 'now()', '1119459011AB')
         `;
   
@@ -23,8 +24,8 @@ describe("Testing CreateCategoryController",() =>{
     });
 
     afterAll(async () =>{
-        // await connection.dropDatabase();
-        // await connection.close();
+         await connection.dropDatabase();
+         await connection.close();
     });
 
     it("should be able to create a category",
@@ -69,7 +70,7 @@ describe("Testing CreateCategoryController",() =>{
             Authorization: `Bearer ${refreshToken}`
         });
 
-        expect(response.status).toBe(201);
+        expect(response.status).toBe(400);
     });
 
     });

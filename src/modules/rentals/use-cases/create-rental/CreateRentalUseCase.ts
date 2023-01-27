@@ -35,7 +35,7 @@ class CreateRentalUseCase {
 
         if(carUnavaliable){
             throw new AppError(
-                "Car is not available"
+                "This car is unavaliable"
             );
         }
 
@@ -44,7 +44,7 @@ class CreateRentalUseCase {
 
         if(rentalOpenByUser){
             throw new AppError(
-                "There is an open rental by user"
+                "This user already has a rent in progress"
             );
         }
 

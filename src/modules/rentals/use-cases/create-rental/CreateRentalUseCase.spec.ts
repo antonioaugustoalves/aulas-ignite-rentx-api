@@ -48,8 +48,17 @@ describe("Create a new  Rental",() =>{
 
     it("should not be able to open a new rental if user already has a rental in progress", 
     async() =>{
+        const car = await carsRepository.create({
+            name: "Celta",
+            description: "Celta 1.0 Flex",
+            dailyRate: 200.00,
+            licensePlate: "IQQ2323",
+            fineAmount: 100.00,
+            brand: "GM",
+            categoryId: "1234",
+        });
         await createRentalUseCase.execute({
-            carId: "1234",
+            carId: car.id,
             userId:"000430",
             expectedReturnDate: returnDate
 
@@ -57,7 +66,7 @@ describe("Create a new  Rental",() =>{
 
         await expect(
             createRentalUseCase.execute({
-                carId: "123456",
+                carId: "123",
                 userId:"000430",
             expectedReturnDate: returnDate
             })
@@ -68,8 +77,17 @@ describe("Create a new  Rental",() =>{
 
     it("should not be able to open a new rental if car already is rented", 
     async() =>{
+        const car = await carsRepository.create({
+            name: "Celta",
+            description: "Celta 1.0 Flex",
+            dailyRate: 200.00,
+            licensePlate: "IQQ2323",
+            fineAmount: 100.00,
+            brand: "GM",
+            categoryId: "1234",
+        });
         await createRentalUseCase.execute({
-            carId: "123456",
+            carId: car.id,
             userId:"007153",
             expectedReturnDate: returnDate
 
@@ -77,7 +95,7 @@ describe("Create a new  Rental",() =>{
 
         await expect(
             createRentalUseCase.execute({
-                carId: "123456",
+                carId: car.id,
                 userId:"000430",
                 expectedReturnDate: returnDate
             })
@@ -88,9 +106,19 @@ describe("Create a new  Rental",() =>{
 
     it("should not be able to create a rent if return date is less than 24 hs ",
     async() =>{
+        const car = await carsRepository.create({
+            name: "Celta",
+            description: "Celta 1.0 Flex",
+            dailyRate: 200.00,
+            licensePlate: "IQQ2323",
+            fineAmount: 100.00,
+            brand: "GM",
+            categoryId: "1234",
+        });
+
         await expect(
             createRentalUseCase.execute({
-                carId: "123456",
+                carId: car.id,
                 userId:"000430",
                 expectedReturnDate: dayjs().toDate()
             })
