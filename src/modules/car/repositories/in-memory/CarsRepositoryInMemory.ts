@@ -6,11 +6,14 @@ class CarsRepositoryInMemory implements ICarsRepository {
     
     
     
+    
     cars:Car[] = [];
 
     async create({
         name, description, dailyRate, licensePlate,
-        fineAmount,brand, categoryId, specifications, id
+        fineAmount,brand, categoryId, specifications, id,
+        
+
     }: ICarDTO): Promise<Car> {
         const car = new Car();
         Object.assign(car, {
@@ -19,6 +22,14 @@ class CarsRepositoryInMemory implements ICarsRepository {
         });
         this.cars.push(car);
         return car;
+    }
+
+    async updateAvaliable(id: string, avaliable: boolean): Promise<void> {
+        const findIndex = this.cars.findIndex(
+            (car) => car.id === id
+        );
+
+        this.cars[findIndex].avaliable = avaliable
     }
 
     async findByLicensePlate(licensePlate: string): Promise<Car> {

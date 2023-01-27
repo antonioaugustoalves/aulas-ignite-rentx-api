@@ -17,7 +17,9 @@ class CreateRentalController {
                 carId, userId: id, expectedReturnDate
             });
 
-            return response.status(201).json(rental);
+             return response.status(201).json(rental);
 
         }
 }
+
+export { CreateRentalController }
