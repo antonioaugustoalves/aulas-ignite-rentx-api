@@ -9,7 +9,7 @@ class RentalsRepository implements IRentalsRepository {
     constructor(){
         this.repository = getRepository(Rental);
     }
-
+    
     async create({
         userId,
         carId,
@@ -35,6 +35,11 @@ class RentalsRepository implements IRentalsRepository {
         });
 
         return openByUser;
+    }
+
+    async findById(id: string): Promise<Rental> {
+        const rental = await this.repository.findOne(id);
+        return rental;
     }
 }
 
