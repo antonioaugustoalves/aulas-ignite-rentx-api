@@ -17,6 +17,9 @@
                 ],
                 "summary": "Create Category",
                 "description": " Create a new category",
+                "security":[
+                    {"bearerAuth":[]}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -136,6 +139,38 @@
                     "Specifications"
                 ]
             }
+        },
+        "/sessions":{
+            "post":{
+                "tags":["Sessions"],
+                "summary": "Authentication user",
+                "description": "Authentication for API user. Some features must be accessed with login",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "email":{
+                                        "type":"string"
+                                    },
+                                   "password":{
+                                    "type":"string"
+                                   } 
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Email or password incorrect"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -149,6 +184,14 @@
                     "type": "string"
                 }
             }
+        }
+    },
+
+    "securitySchemes": {
+        "bearerAuth":{
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
         }
     }
 }
